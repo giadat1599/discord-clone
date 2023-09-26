@@ -16,6 +16,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useOrigin } from "@/hooks/use-origin";
+import { cn } from "@/lib/utils";
 
 export const InviteModal = () => {
   const { onClose, isOpen, type, data, onOpen } = useModal();
@@ -84,7 +85,11 @@ export const InviteModal = () => {
             onClick={onGenerateNewLink}
           >
             Generate a new link
-            <RefreshCw className="w-4 h-4 ml-2" />
+            <RefreshCw
+              className={cn("w-4 h-4 ml-2", {
+                "animate-spin": loading,
+              })}
+            />
           </Button>
         </div>
       </DialogContent>
