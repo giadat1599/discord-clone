@@ -90,7 +90,7 @@ export async function DELETE(
       },
       data: {
         members: {
-          delete: {
+          deleteMany: {
             id: params.memberId,
             profileId: {
               not: profile.id,
