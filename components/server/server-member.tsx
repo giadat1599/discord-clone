@@ -5,6 +5,7 @@ import { Member, MemberRole, Profile, Server } from "@prisma/client";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/user-avatar";
+import { MemberRoleTootip } from "../member-role-tootip";
 
 interface ServerMemberProps {
   member: Member & { profile: Profile };
@@ -47,7 +48,7 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
       >
         {member.profile.name}
       </p>
-      {icon}
+      <MemberRoleTootip role={member.role}>{icon}</MemberRoleTootip>
     </button>
   );
 };

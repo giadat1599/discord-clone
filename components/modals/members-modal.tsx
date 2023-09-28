@@ -38,6 +38,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserAvatar } from "@/components/user-avatar";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { MemberRoleTootip } from "../member-role-tootip";
 
 const roleIconMap = {
   GUEST: null,
@@ -110,7 +111,9 @@ export const MembersModal = () => {
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center gap-x-1">
                   {member.profile.name}
-                  {roleIconMap[member.role]}
+                  <MemberRoleTootip role={member.role}>
+                    {roleIconMap[member.role]}
+                  </MemberRoleTootip>
                 </div>
                 <p className="text-xs text-zinc-500">{member.profile.email}</p>
               </div>
