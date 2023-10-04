@@ -40,12 +40,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { MemberRoleTootip } from "../member-role-tootip";
 
-const roleIconMap = {
-  GUEST: null,
-  MODERATOR: <ShieldCheck className="h-4 w-4text-indigo-500" />,
-  ADMIN: <ShieldAlert className="h-4 w-4 text-rose-500" />,
-};
-
 export const MembersModal = () => {
   const router = useRouter();
   const { onClose, isOpen, type, data, onOpen } = useModal();
@@ -111,9 +105,7 @@ export const MembersModal = () => {
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center gap-x-1">
                   {member.profile.name}
-                  <MemberRoleTootip role={member.role}>
-                    {roleIconMap[member.role]}
-                  </MemberRoleTootip>
+                  <MemberRoleTootip role={member.role} />
                 </div>
                 <p className="text-xs text-zinc-500">{member.profile.email}</p>
               </div>

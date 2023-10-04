@@ -1,10 +1,11 @@
 "use client";
 
 import { MemberRole } from "@prisma/client";
-import { PropsWithChildren } from "react";
-import { ActionTooltip } from "./action-tooltip";
 
-interface MemberRoleTootipProps extends PropsWithChildren {
+import { ActionTooltip } from "./action-tooltip";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
+
+interface MemberRoleTootipProps {
   role: MemberRole;
 }
 
@@ -14,6 +15,18 @@ const roleTooltipMap = {
   [MemberRole.MODERATOR]: "Moderator",
 };
 
-export const MemberRoleTootip = ({ role, children }: MemberRoleTootipProps) => {
-  return <ActionTooltip label={roleTooltipMap[role]}>{children}</ActionTooltip>;
+const roleIconMap = {
+  [MemberRole.GUEST]: null,
+  [MemberRole.MODERATOR]: (
+    <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />
+  ),
+  [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
+};
+
+export const MemberRoleTootip = ({ role }: MemberRoleTootipProps) => {
+  return (
+    <ActionTooltip label={roleTooltipMap[role]}>
+      {roleIconMap[role]}
+    </ActionTooltip>
+  );
 };

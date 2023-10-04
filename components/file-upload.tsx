@@ -35,7 +35,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
         <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
         <a
           href={value}
-          target="__blank"
+          target="_blank"
           rel="noopener noreferrer"
           className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
         >
