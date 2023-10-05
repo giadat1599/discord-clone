@@ -4,6 +4,7 @@ import { Member, MemberRole, Profile } from "@prisma/client";
 import * as z from "zod";
 import axios from "axios";
 import qs from "query-string";
+import { useRouter, useParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserAvatar } from "../user-avatar";
@@ -50,6 +51,8 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const { onOpen } = useModal();
+  const params = useParams();
+  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
   const formMethods = useForm<FormType>({
@@ -68,6 +71,14 @@ export const ChatItem = ({
   const isFilePDF = fileUrl && fileType === "pdf";
   const isFileImage = fileUrl && !isFilePDF;
   const isSubmiting = formMethods.formState.isSubmitting;
+
+  const onMemberCLick = () => {
+    if (member.id === currentMember.id) {
+      return;
+    }
+
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
+  };
 
   const onUpdateMessage: SubmitHandler<FormType> = async (data) => {
     try {
@@ -105,13 +116,19 @@ export const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
+        <div
+          className="cursor-pointer hover:drop-shadow-md transition"
+          onClick={() => onMemberCLick()}
+        >
           <UserAvatar src={member.profile.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
-              <p className="font-semibold text-sm hover:underline cursor-pointer">
+              <p
+                className="font-semibold text-sm hover:underline cursor-pointer"
+                onClick={() => onMemberCLick()}
+              >
                 {member.profile.name}
               </p>
               <MemberRoleTootip role={member.role} />
