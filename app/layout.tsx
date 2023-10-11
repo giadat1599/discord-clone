@@ -9,6 +9,7 @@ import { ModalProvider } from "@/components/providers/modal-provider";
 import { cn } from "@/lib/utils";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
+import NextTopLoader from "nextjs-toploader";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -26,6 +27,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
+          <NextTopLoader
+            color="#2299DD"
+            initialPosition={0.08}
+            height={4}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+          />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"

@@ -1,11 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Member, MemberRole, Profile, Server } from "@prisma/client";
-import { ShieldAlert, ShieldCheck } from "lucide-react";
+import { Member, Profile, Server } from "@prisma/client";
+
 import { useParams, useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/user-avatar";
 import { MemberRoleTootip } from "../member-role-tootip";
+import Link from "next/link";
 
 interface ServerMemberProps {
   member: Member & { profile: Profile };
@@ -14,13 +15,11 @@ interface ServerMemberProps {
 
 export const ServerMember = ({ member, server }: ServerMemberProps) => {
   const params = useParams();
-  const router = useRouter();
 
-  const onNavigate = () => {
-    router.push(`/servers/${server.id}/conversations/${member.id}`);
-  };
+  const onNavigate = () => {};
   return (
-    <button
+    <Link
+      href={`/servers/${server.id}/conversations/${member.id}`}
       className={cn(
         "group p-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
         {
@@ -45,6 +44,6 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
         {member.profile.name}
       </p>
       <MemberRoleTootip role={member.role} />
-    </button>
+    </Link>
   );
 };
